@@ -20,6 +20,12 @@ class _QuizState extends State<Quiz> {
   //   activeScreen = StartScreen(switchScreen); // phải khai báo activeScreen trong này là để cho switchScreen được tải hoàn chỉnh, nếu ko sẽ có thể tải ko đủ
   //   super.initState();
   // }
+  void restartQuiz(){
+    setState(() {
+      selectedAnswers = [];
+      activeScreen = 'question_screen';
+    });
+  }
   void chooseAnswer(String answer) {
     selectedAnswers.add(answer);
     if (selectedAnswers.length == questions.length) {
@@ -45,7 +51,7 @@ class _QuizState extends State<Quiz> {
       );
     }
     if (activeScreen == "result-screen") {
-      screenWidget =  ResultScreen(chosenAnswers: selectedAnswers,);
+      screenWidget =  ResultScreen(chosenAnswers: selectedAnswers, onRestart: restartQuiz,);
     }
     return MaterialApp(
       home: Scaffold(
